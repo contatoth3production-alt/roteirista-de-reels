@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Edit(marca/**)",
+      "Edit(roteiros/**)"
+    ],
+    "deny": [
+      "Bash",
+      "WebFetch",
+      "WebSearch"
+    ]
+  }
+}

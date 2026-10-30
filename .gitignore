@@ -1,0 +1,5 @@
+marca/marca.md
+roteiros/*
+!roteiros/.gitkeep
+.env
+.env.*

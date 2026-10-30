@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Teleprompter · {{TITULO}}</title>
+<style>
+  :root{--fundo:#0A0A0A;--texto:#F5F5F7;--destaque:#00A3FF;--apagado:#7a828c;--tam:34px}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--fundo);color:var(--texto);font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif}
+  header{position:sticky;top:0;z-index:2;display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between;
+    padding:12px 16px;background:rgba(10,10,10,.94);border-bottom:1px solid #1d2128}
+  h1{font-size:15px;font-weight:700;margin:0;color:var(--apagado)}
+  .ctrl{display:flex;gap:8px;align-items:center}
+  button{font:inherit;font-size:15px;font-weight:700;border:0;border-radius:999px;padding:10px 16px;background:#1d2128;color:var(--texto);cursor:pointer}
+  button.on{background:var(--destaque);color:#0A0A0A}
+  main{max-width:820px;margin:0 auto;padding:40px 20px 70vh}
+  .bloco{margin:0 0 44px}
+  .n{font-size:13px;font-weight:800;letter-spacing:.18em;color:var(--destaque);margin:0 0 8px}
+  p{font-size:var(--tam);font-weight:800;line-height:1.35;margin:0 0 10px}
+  p b{color:var(--destaque)}
+  .tela{font-size:15px;line-height:1.5;color:var(--apagado)}
+  .linha{position:fixed;left:0;right:0;top:38vh;height:2px;background:rgba(0,163,255,.35);pointer-events:none}
+</style>
+</head>
+<body>
+<header>
+  <h1>{{TITULO}}</h1>
+  <div class="ctrl">
+    <button id="menos" aria-label="Diminuir letra">A−</button>
+    <button id="mais" aria-label="Aumentar letra">A+</button>
+    <button id="vel" aria-label="Velocidade">Vel. 2</button>
+    <button id="rolar">Rolar</button>
+  </div>
+</header>
+<div class="linha" aria-hidden="true"></div>
+<main>
+{{BLOCOS}}
+</main>
+<script>
+  // Teleprompter sem dependência: rola sozinho, muda a velocidade e o tamanho da letra.
+  let rolando = false, vel = 2, ultimo = 0;
+  const raiz = document.documentElement, botao = document.getElementById('rolar'), bVel = document.getElementById('vel');
+  function passo(t) {
+    if (!rolando) return;
+    if (ultimo) window.scrollBy(0, (t - ultimo) * vel * 0.03);
+    ultimo = t; requestAnimationFrame(passo);
+  }
+  botao.onclick = () => { rolando = !rolando; ultimo = 0; botao.classList.toggle('on', rolando); botao.textContent = rolando ? 'Pausar' : 'Rolar'; if (rolando) requestAnimationFrame(passo); };
+  bVel.onclick = () => { vel = vel % 4 + 1; bVel.textContent = 'Vel. ' + vel; };
+  function tam(d) { const a = parseFloat(getComputedStyle(raiz).getPropertyValue('--tam')); raiz.style.setProperty('--tam', Math.min(64, Math.max(22, a + d)) + 'px'); }
+  document.getElementById('mais').onclick = () => tam(4);
+  document.getElementById('menos').onclick = () => tam(-4);
+</script>
+</body>
+</html>

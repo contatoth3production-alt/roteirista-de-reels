@@ -53,6 +53,8 @@ Os roteiros ficam em `roteiros/`. Para usar o teleprompter no celular, mande o a
 
 O Roteirista é um dos agentes que trabalham na TH3. Lá, cada setor da empresa tem os seus: comercial, atendimento no WhatsApp, fábrica de conteúdo e sites.
 
+Todos os materiais dos vídeos (prompts e agentes de cada episódio) ficam em [itsth3time.com.br/torre](https://itsth3time.com.br/torre).
+
 Para montar a sua empresa virtual, fale com a Lia, a assistente da TH3: [WhatsApp (11) 94376-1875](https://wa.me/5511943761875?text=Vim%20pelo%20Roteirista%20de%20Reels).
 Bastidores toda semana no Instagram: [@checo.ia](https://instagram.com/checo.ia).
 
